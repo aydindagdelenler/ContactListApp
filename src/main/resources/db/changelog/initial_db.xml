@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+  <property name="now" value="now()" dbms="h2"/>
+  <property name="autoIncrement" value="true"/>
+
+  <!-- The initial schema. -->
+  <changeSet id="01" author="AYD" dbms="h2">
+    <createTable tableName="CONTACT">
+      <column name="ID" type="long" autoIncrement="${autoIncrement}">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="NAME" type="varchar(200)"/>
+      <column name="URL" type="varchar(2000)"/>
+      <column name="URL_2" type="varchar(2000)"/>
+    </createTable>
+
+    <loadData file="people.csv" relativeToChangelogFile="true"
+      tableName="CONTACT">
+      <column header="NAME"
+        name="NAME"
+        type="VARCHAR"/>
+      <column header="URL"
+        name="URL"
+        type="VARCHAR"/>
+      <column header=""
+        name="URL_2"
+        type="VARCHAR"/>
+    </loadData>
+  </changeSet>
+  <changeSet author="liquibase-docs" id="update">
+    <sql>
+      UPDATE  CONTACT  SET  name  =  CONCAT(name, url) where url_2 is not null;
+    </sql>
+    <sql>
+      UPDATE  CONTACT  SET  url  =  url_2 where url_2 is not null;
+    </sql>
+    <dropColumn tableName="CONTACT">
+      <column  name="URL_2"/>
+    </dropColumn>
+  </changeSet>
+</databaseChangeLog>
