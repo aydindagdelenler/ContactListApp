@@ -31,7 +31,7 @@ class ContactRepositoryTest {
     contact2.setId(2);
     contact2.setName("Second Contact");
     contact2.setUrl(
-        "https://vignette.wikia.nocookie.net/simpsons/images/4/4d/MargeSimpson.png/revision/latest/scale-to-width-down/78?cb=20180314071936\t");
+        "https://vignette.wikia.nocookie.net/simpsons/images/4/4d/MargeSimpson.png/revision/latest/scale-to-width-down/78?cb=20180314071936");
 
     contactRepository.saveAll(List.of(contact1, contact2));
   }
