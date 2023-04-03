@@ -48,4 +48,8 @@ public class ContactService {
 
     return contactResponseDto;
   }
+
+  public void deleteById(long id) {
+    contactRepository.deleteById(id);
+  }
 }

@@ -4,6 +4,7 @@ import com.kuehne.dtos.ContactDto;
 import com.kuehne.dtos.ContactResponseDto;
 import com.kuehne.services.ContactService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,5 +44,15 @@ public class ContactController {
       @RequestParam(defaultValue = DEFAULT_PAGE_VALUE) int currentPage,
       @RequestParam(defaultValue = DEFAULT_SIZE_VALUE) int itemsPerPage) {
     return ResponseEntity.ok(contactService.listByName(name, currentPage, itemsPerPage));
+  }
+
+  @DeleteMapping("/delete/{id}")
+  public ResponseEntity<HttpStatus> deleteById(@PathVariable("id") long id) {
+    try {
+      contactService.deleteById(id);
+      return new ResponseEntity<>(HttpStatus.OK);
+    } catch (Exception e) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
 }
