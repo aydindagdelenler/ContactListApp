@@ -40,13 +40,7 @@ public class ContactService {
   private ContactResponseDto<ContactDto> getPagingResponse(Page<Contact> pageContacts) {
     var contactDtoList = ContactMapper.INSTANCE.toDtoList(pageContacts.getContent());
 
-    var contactResponseDto = new ContactResponseDto<ContactDto>();
-    contactResponseDto.setContacts(contactDtoList);
-    contactResponseDto.setCurrentPage(pageContacts.getNumber());
-    contactResponseDto.setTotalItems(pageContacts.getTotalElements());
-    contactResponseDto.setTotalPages(pageContacts.getTotalPages());
-
-    return contactResponseDto;
+    return new ContactResponseDto<>(pageContacts.getNumber(), pageContacts.getTotalPages(), pageContacts.getTotalElements(), contactDtoList);
   }
 
   public void deleteById(long id) {

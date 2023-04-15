@@ -53,7 +53,7 @@ class ContactServiceTest {
     when(contactRepository.findAll(PageRequest.of(0, 10))).thenReturn(pageContact);
 
     var resultMap = contactService.list(0, 10);
-    var resultName = resultMap.getContacts().get(0).getName();
+    var resultName = resultMap.contacts().get(0).name();
     assertThat(resultName).isEqualTo("First Contact");
   }
 
@@ -66,7 +66,7 @@ class ContactServiceTest {
         pageContact);
 
     var resultMap = contactService.listByName(name, 0, 10);
-    var resultName = resultMap.getContacts().get(0).getName();
+    var resultName = resultMap.contacts().get(0).name();
     assertThat(resultName).isEqualTo("First Contact");
   }
 }

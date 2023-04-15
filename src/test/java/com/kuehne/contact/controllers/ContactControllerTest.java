@@ -34,23 +34,9 @@ class ContactControllerTest {
 
   @BeforeEach
   public void init() {
-    var contact1 = new ContactDto();
-    contact1.setId(1);
-    contact1.setName("First Contact");
-    contact1.setUrl(
-            "https://vignette.wikia.nocookie.net/simpsons/images/b/bd/Homer_Simpson.png/revision/latest/scale-to-width-down/72?cb=20140126234206");
-
-    var contact2 = new ContactDto();
-    contact2.setId(2);
-    contact2.setName("Second Contact");
-    contact2.setUrl(
-            "https://vignette.wikia.nocookie.net/simpsons/images/4/4d/MargeSimpson.png/revision/latest/scale-to-width-down/78?cb=20180314071936");
-
-    contactResponseDto = new ContactResponseDto<>();
-    contactResponseDto.setContacts(List.of(contact1, contact2));
-    contactResponseDto.setCurrentPage(0);
-    contactResponseDto.setTotalItems(10);
-    contactResponseDto.setTotalPages(1);
+    var contact1 = new ContactDto(1, "First Contact", "https://vignette.wikia.nocookie.net/simpsons/images/b/bd/Homer_Simpson.png/revision/latest/scale-to-width-down/72?cb=20140126234206");
+    var contact2 = new ContactDto(2, "Second Contact", "https://vignette.wikia.nocookie.net/simpsons/images/4/4d/MargeSimpson.png/revision/latest/scale-to-width-down/78?cb=20180314071936");
+    contactResponseDto = new ContactResponseDto<>(0, 1, 10, List.of(contact1, contact2));
   }
 
   @Test
